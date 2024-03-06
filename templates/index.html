@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<form class="form-group" action="{{url_for('summarize')}}" method="post">
+    <div class="form-group">
+        <label for="text-input" class="form-label mt-4"><h3>Input Text</h3></label>
+        <textarea class="form-control" id="text-input" rows="3" name="data"
+        placeholder="Enter the input text"></textarea>
+        <div class="slider-container">
+            <input type="range" min="200" max="1000" step="200" value="200" class="slider" id="slider" name="maxL">
+            <output for="slider" id="output">200</output>
+        </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+    
+    <div class="form-group">
+        <label for="text-input" class="form-label mt-4"><h3>Summary</h3></label>
+        <textarea class="form-control" id="text-input" rows="3" name="result"
+        readonly placeholder="Your Summary">{{result}}</textarea>
+    </div>
+
+
+</form>
+
+{% endblock %}
