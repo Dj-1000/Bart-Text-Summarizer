@@ -33,10 +33,6 @@ def summarize(name = 'Summarize'):
         else:
             maxL = int(req.form['maxL'])
             minL =  maxL 
-            print("MINL :",minL)
-            print("Input data :",data,maxL,minL)
-            # sentence = clean_text(sentence)	
-            print("HI")
             payload = {
                 "inputs":data ,
                 "parameters":{
@@ -45,7 +41,6 @@ def summarize(name = 'Summarize'):
                 }
             }
             output = query(payload)[0].get('summary_text')
-            print("OUTPUT :",output)
         return render_template('index.html', result = output,error = error_message)
     else:
         return redirect(url_for('home'))
