@@ -14,19 +14,19 @@ def home():
 
 
 
-
-
 @app.route('/summarize',methods = ["GET","POST"])
 def summarize(name = 'Summarize'):
     if req.method=="POST":
         token = os.getenv('API_TOKEN')
         API_URL = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
         headers = {"Authorization": f"Bearer {token}"}
-
+        error_message =''
+        output = ''
+        
         def query(payload):
             response = requests.post(API_URL, headers=headers, json=payload)
             return response.json()
-        output = ''
+        
         data = req.form['data']
         if len(data.split(' ')) < 50:
             error_message ="Sorry! We accept at least 50 words for the summarization."
@@ -41,6 +41,7 @@ def summarize(name = 'Summarize'):
                 }
             }
             output = query(payload)[0].get('summary_text')
+
         return render_template('index.html', result = output,error = error_message)
     else:
         return redirect(url_for('home'))
